@@ -15,7 +15,7 @@ import java.time.Instant;
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    private Long commentId;
     @NotEmpty
     private String text;
     @ManyToOne(fetch = FetchType.LAZY)
