@@ -24,13 +24,11 @@ public class AuthController {
     private final RefreshTokenService refreshTokenService;
 
     @PostMapping("/signup")
-    public ResponseEntity<Map<String, String>> signUp(@RequestBody RegisterRequest registerRequest) {
+    public ResponseEntity<String> signUp(@RequestBody RegisterRequest registerRequest) {
         authService.signUp(registerRequest);
-        HashMap<String, String> response = new HashMap<>();
-        response.put("message", "User registered successfully");
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(response);
+                .body("User registered successfully");
     }
 
     @PostMapping("/login")
