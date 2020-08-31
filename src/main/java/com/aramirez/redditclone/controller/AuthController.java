@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -22,9 +24,13 @@ public class AuthController {
     private final RefreshTokenService refreshTokenService;
 
     @PostMapping("/signup")
-    public ResponseEntity<String> signUp(@RequestBody RegisterRequest registerRequest) {
+    public ResponseEntity<Map<String, String>> signUp(@RequestBody RegisterRequest registerRequest) {
         authService.signUp(registerRequest);
-        return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
+        HashMap<String, String> response = new HashMap<>();
+        response.put("message", "User registered successfully");
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(response);
     }
 
     @PostMapping("/login")
